@@ -1,5 +1,4 @@
 import { cache } from "react";
-import { headers } from "next/headers";
 
 export type ThemeName = "classic-blue" | "modern-emerald";
 
@@ -9,13 +8,25 @@ export type ThemeConfig = {
   colors: Record<string, string>;
 };
 
+function getBaseUrl() {
+  // local dev
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+
+  // Vercel provides VERCEL_URL without protocol
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+
+  // safe fallback
+  return "http://localhost:3000";
+}
+
 export const getTemplates = cache(async (): Promise<ThemeConfig[]> => {
-  const res = await fetch("/api/templates", { cache: "no-store" });
+  const baseUrl = getBaseUrl();
 
-  if (!res.ok) {
-    throw new Error(`Failed to load templates: ${res.status}`);
-  }
+  const res = await fetch(new URL("/api/templates", baseUrl), {
+    cache: "no-store",
+  });
 
+  if (!res.ok) throw new Error(`Failed to load templates: ${res.status}`);
   return res.json();
 });
 
@@ -26,6 +37,5 @@ export async function pickRandomTemplate(): Promise<ThemeConfig> {
 
 export async function getTemplateByKey(key?: string | null) {
   const templates = await getTemplates();
-  const found = templates.find((t) => t.key === key);
-  return found ?? templates[0];
+  return templates.find((t) => t.key === key) ?? templates[0];
 }
