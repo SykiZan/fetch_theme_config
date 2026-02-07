@@ -9,11 +9,24 @@ export type Product = {
 };
 
 export async function fetchProducts(): Promise<Product[]> {
-  const res = await fetch("https://fakestoreapi.com/products", {
-    // for test task: simplest
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch("https://fakestoreapi.com/products", {
+      cache: "no-store",
+    });
 
-  if (!res.ok) throw new Error("Failed to fetch products");
-  return res.json();
+    if (!res.ok) {
+      console.error(
+        "fetchProducts failed:",
+        res.status,
+        await res.text()
+      );
+      return [];
+    }
+
+    return res.json();
+  } catch (err) {
+    console.error("fetchProducts exception:", err);
+    return [];
+  }
 }
+

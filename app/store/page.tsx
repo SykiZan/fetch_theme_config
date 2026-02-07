@@ -17,7 +17,9 @@ export default async function StorePage() {
       </h1>
 
       <section className="mt-6 rounded-xl p-4 shadow-card bg-[var(--section)] sm:mt-8 sm:p-6 lg:p-8">
-        {isClassic ? (
+        {products.length === 0 ? (
+          <p className="text-muted">Products unavailable right now.</p>
+        ) : isClassic ? (
           <ProductGrid products={products} />
         ) : (
           <ProductList products={products} />
