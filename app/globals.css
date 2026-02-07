@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
+/* defaults only (used before server applies theme) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page: #0b1220;
+
+  --section: #122117;
+  --panel: #0b2a21;
+
+  --text: #ecfff7;
+  --muted: #96c4a8;
+
+  --primary: #2ee59d;
+  --primaryText: #052116;
+
+  --border: #134537;
+  --ink: #0b1220;
+
+  --card: #0b2a21;
+  --cardText: #ecfff7;
+
+  --radius: 12px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--page);
+  color: var(--text);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
