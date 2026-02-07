@@ -10,15 +10,7 @@ export type ThemeConfig = {
 };
 
 export const getTemplates = cache(async (): Promise<ThemeConfig[]> => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-
-  if (!baseUrl) {
-    throw new Error("NEXT_PUBLIC_SITE_URL is not set");
-  }
-
-  const res = await fetch(`${baseUrl}/api/templates`, {
-    cache: "no-store",
-  });
+  const res = await fetch("/api/templates", { cache: "no-store" });
 
   if (!res.ok) {
     throw new Error(`Failed to load templates: ${res.status}`);
