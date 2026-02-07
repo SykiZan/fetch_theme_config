@@ -1,13 +1,10 @@
 export const dynamic = "force-dynamic";
 
-import { fetchProducts } from "@/lib/products";
 import { readThemeFromCookie } from "@/lib/theme.server";
-import ProductGrid from "@/components/ProductGrid";
-import ProductList from "@/components/ProductList";
+import ProductsSection from "@/components/ProductsSection";
 
 export default async function StorePage() {
   const theme = await readThemeFromCookie();
-  const products = await fetchProducts();
   const isClassic = theme.key === "classic-blue";
 
   return (
@@ -17,13 +14,7 @@ export default async function StorePage() {
       </h1>
 
       <section className="mt-6 rounded-xl p-4 shadow-card bg-[var(--section)] sm:mt-8 sm:p-6 lg:p-8">
-        {products.length === 0 ? (
-          <p className="text-muted">Products unavailable right now.</p>
-        ) : isClassic ? (
-          <ProductGrid products={products} />
-        ) : (
-          <ProductList products={products} />
-        )}
+        <ProductsSection isClassic={isClassic} />
       </section>
     </main>
   );
