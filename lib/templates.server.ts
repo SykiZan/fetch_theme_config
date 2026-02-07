@@ -20,9 +20,7 @@ function getBaseUrl() {
 }
 
 export const getTemplates = cache(async (): Promise<ThemeConfig[]> => {
-  const baseUrl = getBaseUrl();
-
-  const res = await fetch(new URL("/api/templates", baseUrl), {
+  const res = await fetch(new URL("/api/templates", getBaseUrl()), {
     cache: "no-store",
   });
 
