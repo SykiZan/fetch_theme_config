@@ -9,24 +9,23 @@ export type ThemeConfig = {
 };
 
 function getBaseUrl() {
-  // local dev
   if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
-
-  // Vercel provides VERCEL_URL without protocol
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-
-  // safe fallback
   return "http://localhost:3000";
 }
 
 export const getTemplates = cache(async (): Promise<ThemeConfig[]> => {
-  const res = await fetch(new URL("/api/templates", getBaseUrl()), {
+  const res = await fetch(`${getBaseUrl()}/api/templates`, {
     cache: "no-store",
   });
 
-  if (!res.ok) throw new Error(`Failed to load templates: ${res.status}`);
+  if (!res.ok) {
+    throw new Error(`Failed to load templates: ${res.status}`);
+  }
+
   return res.json();
 });
+
 
 export async function pickRandomTemplate(): Promise<ThemeConfig> {
   const templates = await getTemplates();
