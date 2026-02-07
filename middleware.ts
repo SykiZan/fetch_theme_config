@@ -24,8 +24,7 @@ export async function middleware(req: NextRequest) {
       return NextResponse.next();
     }
 
-    const picked =
-      templates[Math.floor(Math.random() * templates.length)];
+    const picked = templates[Math.floor(Math.random() * templates.length)];
 
     const redirectUrl = req.nextUrl.clone();
     redirectUrl.pathname = "/store";

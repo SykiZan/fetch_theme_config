@@ -9,22 +9,20 @@ export type ThemeConfig = {
   colors: Record<string, string>;
 };
 
-async function getOriginFromHeaders() {
-  const h = await headers(); // ✅ await fixes your TS error
-
-  const host = h.get("x-forwarded-host") ?? h.get("host");
-  const proto = h.get("x-forwarded-proto") ?? "http";
-
-  if (!host) throw new Error("Missing host header");
-  return `${proto}://${host}`;
-}
-
-// ✅ cache() is fine; it will cache per-request in RSC
 export const getTemplates = cache(async (): Promise<ThemeConfig[]> => {
-  const origin = await getOriginFromHeaders();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-  const res = await fetch(`${origin}/api/templates`, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to load templates: ${res.status}`);
+  if (!baseUrl) {
+    throw new Error("NEXT_PUBLIC_SITE_URL is not set");
+  }
+
+  const res = await fetch(`${baseUrl}/api/templates`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to load templates: ${res.status}`);
+  }
 
   return res.json();
 });
