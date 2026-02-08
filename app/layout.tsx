@@ -44,7 +44,7 @@ export default async function RootLayout({
         <title>{theme.templateName}</title>
       </head>
       <body
-        className={`${beVietnam.className} min-h-screen antialiased bg-[var(--page)] text-[var(--text)]`}
+        className={`${beVietnam.className} min-h-screen antialiased bg-page text-text`}
       >
         {children}
       </body>

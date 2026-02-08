@@ -6,7 +6,7 @@ export default function ProductList({ products }: { products: Product[] }) {
     <section className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-5 lg:gap-6">
       {products.slice(0, 10).map((p) => (
         <article key={p.id} className="min-w-0">
-          <div className="relative aspect-square bg-[var(--tile)] rounded-xl overflow-hidden mb-3">
+          <div className="relative aspect-square bg-tile rounded-xl overflow-hidden mb-3">
             <Image
               src={p.image}
               alt={p.title}
@@ -16,11 +16,11 @@ export default function ProductList({ products }: { products: Product[] }) {
             />
           </div>
 
-          <h3 className="text-sm font-semibold text-[var(--text)] line-clamp-2">
+          <h3 className="text-sm font-semibold text-text line-clamp-2">
             {p.title}
           </h3>
 
-          <div className="mt-1 text-[13px] sm:text-[14px] leading-[21px] text-[var(--muted)]">
+          <div className="mt-1 text-[13px] sm:text-[14px] leading-[21px] text-muted">
             ${p.price.toFixed(2)} • {p.rating.rate.toFixed(1)} ({p.rating.count}
             )
           </div>

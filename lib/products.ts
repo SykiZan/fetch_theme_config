@@ -8,6 +8,8 @@ export type Product = {
   rating: { rate: number; count: number };
 };
 
+
+//only for server fetch and local use
 export async function fetchProducts(): Promise<Product[]> {
   try {
     const res = await fetch("https://fakestoreapi.com/products", {

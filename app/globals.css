@@ -18,8 +18,48 @@
 
   --card: #0b2a21;
   --cardText: #ecfff7;
+  --cardMuted: #96c4a8;
+
+  --tile: #ffffff;
+
+  --title-text: #ecfff7;
+  --section-text: #ecfff7;
+  --section-muted: #96c4a8;
 
   --radius: 12px;
+}
+
+@theme {
+  --color-page: var(--page);
+  --color-section: var(--section);
+  --color-panel: var(--panel);
+
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+
+  --color-card: var(--card);
+  --color-cardText: var(--cardText);
+  --color-cardMuted: var(--cardMuted);
+
+  --color-primary: var(--primary);
+  --color-primaryText: var(--primaryText);
+
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+
+  --color-tile: var(--tile);
+
+  --color-title: var(--title-text);
+  --color-sectionText: var(--section-text);
+  --color-sectionMuted: var(--section-muted);
+
+  --radius-card: var(--radius);
+
+  /* ✅ shadow tokens -> shadow-* utilities */
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --shadow-inkSm: 3px 3px 0 var(--ink);
+  --shadow-inkLg: 6px 6px 0 var(--ink);
 }
 
 html,
@@ -27,10 +67,7 @@ body {
   height: 100%;
 }
 
-body {
-  background: var(--page);
-  color: var(--text);
-}
+
 
 * {
   -webkit-font-smoothing: antialiased;

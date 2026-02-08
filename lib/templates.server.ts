@@ -26,12 +26,6 @@ export const getTemplates = cache(async (): Promise<ThemeConfig[]> => {
   return res.json();
 });
 
-
-export async function pickRandomTemplate(): Promise<ThemeConfig> {
-  const templates = await getTemplates();
-  return templates[Math.floor(Math.random() * templates.length)];
-}
-
 export async function getTemplateByKey(key?: string | null) {
   const templates = await getTemplates();
   return templates.find((t) => t.key === key) ?? templates[0];
